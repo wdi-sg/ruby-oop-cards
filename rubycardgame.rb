@@ -40,7 +40,6 @@ class Game
 		puts "want to play again?"
 		@play_again=gets.chomp
 		if (@play_again=="y")
-			puts "here"
 			play
 		else 
 			puts "there"
@@ -49,7 +48,6 @@ class Game
 				@play_again=gets.chomp	
 			end
 		end
-		puts "HELLO"
 		self
 	end
 
@@ -60,9 +58,11 @@ game = Game.new
 while is_game_on
 	game.play.checkWin
 	if game.player_score < -2
+		puts "Game Over"
 		is_game_on=false
 	end
 	if game.play_again=="n"
+		puts "Game Over"
 		is_game_on=false
 	end
 
