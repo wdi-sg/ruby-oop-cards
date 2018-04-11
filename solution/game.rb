@@ -21,5 +21,4 @@ class Game
   def check_game
     @score
   end
-
 end
