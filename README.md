@@ -20,6 +20,10 @@ Look in the `solution/play.rb` if you're not sure how to write the game loop
 Look in the solution class files if you forget the syntax of ruby classes
 
 # further
+Ask the player for their name at the beggining of the game, and print it out at each turn.
+Example: "hello Ray, you have 10 points."
+
+# further
 On each turn, ask the player if he wants to continue with the game.
 If he says no, end the game and output the final score.
 
