@@ -108,7 +108,7 @@ player2 = Player.new(player2_name)
 game = Game.new(player1, player2)
 
 while playing
-  puts "Continue playing? [Y/N]..."
+  puts "\nContinue playing? [Y/N]..."
   continue = gets.chomp
 
   if continue == 'Y' || continue == 'y'
