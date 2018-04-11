@@ -27,13 +27,15 @@ end
 
 game = Game.new
 
+print 'Enter your name: '
+name = gets.chomp
 playing = true
 while playing
   game.play
+  puts name + ' you have points: ' + game.points.to_s
   if game.points < -2
     playing = false
   end
 end
-puts 'points ' + game.points.to_s
 print game.hands
 puts ''
