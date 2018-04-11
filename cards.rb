@@ -36,6 +36,15 @@ while playing
   if game.points < -2
     playing = false
   end
+  option = ''
+  while option != 'y' && option != 'n'    
+    print 'Do you want to end the game? (y/n)'
+    option = gets.chomp
+  end
+
+  if option == 'y'
+    break
+  end
 end
 print game.hands
 puts ''
