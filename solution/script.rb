@@ -21,66 +21,6 @@ class Game
     @deck.slice!(0, n)
   end
 
-  def first_stage(players)
-    players.each do |player|
-      if player.in_play == true
-        wager(player)
-      end
-    end
-
-    players.each do |player|
-      if player.in_play
-        player.draw(2)
-        puts "#{player.name} has drawn a #{player.hand[0].display} of #{player.hand[0].suit} and a #{player.hand[1].display} of #{player.hand[1].suit} for #{player.score} points."
-      end
-    end
-  end
-
-  def wager(player)
-    print "#{player.name}... how much do you wish to wager (out of #{player.moolah})? "
-    amount = gets.chomp.to_i
-    while (amount.class != Integer || amount > player.moolah.to_i || amount == 0) do   
-      if amount.to_i > player.moolah.to_i
-        puts "You can't wager more than what you have!"
-      elsif amount == 0
-        puts "Must wager a positive amount!"
-      else
-        puts "Need a proper amount to wager!"
-      end
-      amount = gets.chomp.to_i
-    end
-    player.moolah -= amount
-    @pot += amount
-  end
-
-  def check(player)
-    if player.score > 21
-      puts "#{player.name} has gone over 21 points and is now out of the game."
-      player.in_play = false
-    elsif player.moolah <= 0
-      puts "#{player.name} has 0 credits and has to sit out."
-      player.in_play = false
-    end
-  end
-
-  def draw(player)
-    print "#{player.name}... draw a card (y/n)? "
-    decision = gets.chomp
-    while (decision.downcase != 'y' && decision.downcase != 'n') do
-      decision = gets.chomp
-    end
-    # if he decides that he's not going to draw any more cards, then he's out of the game for good.
-    if (decision == "n")
-      player.in_play = false
-      return
-    end
-    tmp = player.draw(1)
-    drawn_card = tmp[0]
-    puts "#{player.name} draws a #{drawn_card.display} of #{drawn_card.suit}!"
-    puts "#{player.name} now has a score of #{player.score}."
-    check(player)
-  end
-
   def start(players)
     first_stage(players)
     while @running == true do
@@ -149,6 +89,69 @@ class Game
       end
     end
   end
+
+  private
+
+  def first_stage(players)
+    players.each do |player|
+      if player.in_play == true
+        wager(player)
+      end
+    end
+
+    players.each do |player|
+      if player.in_play
+        player.draw(2)
+        puts "#{player.name} has drawn a #{player.hand[0].display} of #{player.hand[0].suit} and a #{player.hand[1].display} of #{player.hand[1].suit} for #{player.score} points."
+      end
+    end
+  end
+
+  def wager(player)
+    print "#{player.name}... how much do you wish to wager (out of #{player.moolah})? "
+    amount = gets.chomp.to_i
+    while (amount.class != Integer || amount > player.moolah.to_i || amount == 0) do   
+      if amount.to_i > player.moolah.to_i
+        puts "You can't wager more than what you have!"
+      elsif amount == 0
+        puts "Must wager a positive amount!"
+      else
+        puts "Need a proper amount to wager!"
+      end
+      amount = gets.chomp.to_i
+    end
+    player.moolah -= amount
+    @pot += amount
+  end
+
+  def check(player)
+    if player.score > 21
+      puts "#{player.name} has gone over 21 points and is now out of the game."
+      player.in_play = false
+    elsif player.moolah <= 0
+      puts "#{player.name} has 0 credits and has to sit out."
+      player.in_play = false
+    end
+  end
+
+  def draw(player)
+    print "#{player.name}... draw a card (y/n)? "
+    decision = gets.chomp
+    while (decision.downcase != 'y' && decision.downcase != 'n') do
+      decision = gets.chomp
+    end
+    # if he decides that he's not going to draw any more cards, then he's out of the game for good.
+    if (decision == "n")
+      player.in_play = false
+      return
+    end
+    tmp = player.draw(1)
+    drawn_card = tmp[0]
+    puts "#{player.name} draws a #{drawn_card.display} of #{drawn_card.suit}!"
+    puts "#{player.name} now has a score of #{player.score}."
+    check(player)
+  end
+
 end
 
 class Card
