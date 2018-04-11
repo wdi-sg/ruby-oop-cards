@@ -41,16 +41,25 @@ class Game
 	end
 
 	def compare(username)
+		puts "Hello " + username + " you have #{score} points"
+		bet = 1
+		puts "do you want to wager points[Y/N]"
+		choice = gets.chomp
+		if(choice == "Y")
+			puts "how much?"
+			bet = gets.chomp
+		end
+
 		#if player has highest card, increment score
 		if(@playerHand[turn-1] > @computerHand[turn-1])
-			@score += 1
+			@score += bet.to_i.abs
 			puts "score added"
 		#if computer has highest card, deduct score
 		elsif(@playerHand[turn-1] < @computerHand[turn-1])
-			@score -= 1
+			@score -= bet.to_i.abs
 			puts "score deducted"
 		end
-		puts "Hello " + username + " you have #{score} points"
+		puts "Current score: #{score}"
 	end
 end
 
@@ -71,8 +80,8 @@ def Gamestart()
 		newGame.drawCards
 		#Remove two cards from the deck
 		newCards.removeCards
-		newGame.compare(username)	
-		break if (newGame.score < -2)
+		newGame.compare(username)
+		break if (newGame.score < -2)	
 		#break if the score is negative 2
 		puts "do you want to continue playing [Y/N]"
 		answer = gets.chomp
