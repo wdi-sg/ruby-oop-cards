@@ -79,6 +79,7 @@ while true
 			puts "You lost"
 		end
 	else
+		puts "Wuss! Next round..."
 		play.turn = true
 	end
 	
