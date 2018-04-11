@@ -108,33 +108,43 @@ player2 = Player.new(player2_name)
 game = Game.new(player1, player2)
 
 while playing
-  puts "\nDeck size => #{game.deck.show_deck.size}"
+  puts "Continue playing? [Y/N]..."
+  continue = gets.chomp
 
-  # End the game when one of the player's score becomes less than -2
-  if game.check_score == "p1_win"
-    puts "\n#{player1.name} has won the game"
+  if continue == 'Y' || continue == 'y'
+    puts "\nDeck size => #{game.deck.show_deck.size}"
+
+    # End the game when one of the player's score becomes less than -2
+    if game.check_score == "p1_win"
+      puts "\n#{player1.name} has won the game"
+      puts "#{player1.name} has a total score of #{player1.score}"
+      puts "#{player2.name} has a total score of #{player2.score}"
+      playing = false
+      break
+    end
+
+    # End the game when one of the player's score becomes less than -2
+    if game.check_score == "p2_win"
+      puts "\n#{player2.name} has won the game"
+      puts "#{player1.name} has a total score of #{player1.score}"
+      puts "#{player2.name} has a total score of #{player2.score}"
+      playing = false
+      break
+    end
+
+    # End the game if the deck becomes empty
+    if game.check_deck_size
+      puts "Game Over, deck has become empty..."
+      playing = false
+      break
+    end
+
+    # Continue on with the game
+    game.play
+  else
+    puts "\nEnding game..."
     puts "#{player1.name} has a total score of #{player1.score}"
     puts "#{player2.name} has a total score of #{player2.score}"
-    playing = false
     break
   end
-
-  # End the game when one of the player's score becomes less than -2
-  if game.check_score == "p2_win"
-    puts "\n#{player2.name} has won the game"
-    puts "#{player1.name} has a total score of #{player1.score}"
-    puts "#{player2.name} has a total score of #{player2.score}"
-    playing = false
-    break
-  end
-
-  # End the game if the deck becomes empty
-  if game.check_deck_size
-    puts "Game Over, deck has become empty..."
-    playing = false
-    break
-  end
-
-  # Continue on with the game
-  game.play
 end
