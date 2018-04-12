@@ -1,4 +1,5 @@
 class Cards
+  attr_reader :cards
   def initialize
     @cards = []
     52.times do |number|
@@ -7,10 +8,7 @@ class Cards
   end
 
   def show_card
-    @cards.shuffle.first
+    @cards.shuffle!.shift
   end
 
-  def get_card
-    @cards.shuffle.pop
-  end
 end
