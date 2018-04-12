@@ -3,7 +3,6 @@ require 'byebug'
 DEFAULT_CASH_PILE = 100
 
 class Game
-
   attr_accessor :deck, :pot, :running
 
   def initialize
@@ -23,7 +22,7 @@ class Game
 
   def start(players)
     first_stage(players)
-    while @running == true do
+    while @running == true
       players.each do |player|
         if player.in_play == true
           if player.moolah <= 0
@@ -35,56 +34,53 @@ class Game
         end
       end
 
-      unless (players.any?{|player| player.in_play == true})
-        winning_player = nil
-        winning_score = 0
+      next if players.any? { |player| player.in_play == true }
+      winning_player = nil
+      winning_score = 0
+      draw = false
+
+      players.each do |player|
+        puts "#{player.name}'s final score is #{player.score}."
+        if player.score > winning_score && player.score <= 21
+          winning_player = player
+          winning_score = player.score
+        elsif player.score == winning_score
+          draw = true
+        end
+      end
+
+      if draw == true
+        puts "We have a draw game. Let's go again"
         draw = false
+      elsif !winning_player.nil?
+        winning_player.moolah += @pot
+        @pot = 0
+        puts "#{winning_player.name} wins the game with a score of #{winning_player.score}! #{winning_player.name} now has #{winning_player.moolah} credits."
+      else
+        puts 'You guys suck. Nobody won this time.'
+      end
 
+      if draw == true
         players.each do |player|
-          puts "#{player.name}'s final score is #{player.score}."
-          if player.score > winning_score && player.score <= 21
-            winning_player = player
-            winning_score = player.score
-          elsif player.score == winning_score
-            draw = true
-          end
+          player.score = 0
+          player.in_play = true unless player.moolah <= 0
         end
+        first_stage(players)
+      else
+        print 'Go again (y/n)? '
+        decision = gets.chomp
+        decision = gets.chomp while decision != 'y' && decision != 'n'
 
-        if draw == true
-          puts "We have a draw game. Let's go again"
-          draw = false
-        elsif winning_player != nil
-          winning_player.moolah += @pot
-          @pot = 0
-          puts "#{winning_player.name} wins the game with a score of #{winning_player.score}! #{winning_player.name} now has #{winning_player.moolah} credits."
+        if decision == 'n'
+          @running = false
         else
-          puts "You guys suck. Nobody won this time."
-        end
-
-        if draw == true
           players.each do |player|
             player.score = 0
-            player.in_play = true unless player.moolah <= 0
+            player.hand = []
+            player.in_play = true
+            check(player)
           end
           first_stage(players)
-        else
-          print "Go again (y/n)? "
-          decision = gets.chomp
-          while decision != 'y' && decision != 'n'
-            decision = gets.chomp
-          end
-  
-          if decision == 'n'
-            @running = false
-          else
-            players.each do |player|
-              player.score = 0
-              player.hand = []
-              player.in_play = true
-              check(player)
-            end
-            first_stage(players)
-          end
         end
       end
     end
@@ -94,9 +90,7 @@ class Game
 
   def first_stage(players)
     players.each do |player|
-      if player.in_play == true
-        wager(player)
-      end
+      wager(player) if player.in_play == true
     end
 
     players.each do |player|
@@ -110,13 +104,13 @@ class Game
   def wager(player)
     print "#{player.name}... how much do you wish to wager (out of #{player.moolah})? "
     amount = gets.chomp.to_i
-    while (amount.class != Integer || amount > player.moolah.to_i || amount == 0) do   
+    while amount.class != Integer || amount > player.moolah.to_i || amount == 0
       if amount.to_i > player.moolah.to_i
         puts "You can't wager more than what you have!"
       elsif amount == 0
-        puts "Must wager a positive amount!"
+        puts 'Must wager a positive amount!'
       else
-        puts "Need a proper amount to wager!"
+        puts 'Need a proper amount to wager!'
       end
       amount = gets.chomp.to_i
     end
@@ -137,11 +131,11 @@ class Game
   def draw(player)
     print "#{player.name}... draw a card (y/n)? "
     decision = gets.chomp
-    while (decision.downcase != 'y' && decision.downcase != 'n') do
+    while !decision.casecmp('y').zero? && !decision.casecmp('n').zero?
       decision = gets.chomp
     end
     # if he decides that he's not going to draw any more cards, then he's out of the game for good.
-    if (decision == "n")
+    if decision == 'n'
       player.in_play = false
       return
     end
@@ -151,11 +145,9 @@ class Game
     puts "#{player.name} now has a score of #{player.score}."
     check(player)
   end
-
 end
 
 class Card
-
   attr_accessor :value, :suit, :display
 
   def initialize(game)
@@ -165,16 +157,16 @@ class Card
     @value = card[1]
     @display = @value
     if @value == 1
-      @display = "Ace"
+      @display = 'Ace'
       @value = 11
     elsif @value == 11
-      @display = "Jack"
+      @display = 'Jack'
       @value = 10
     elsif @value == 12
-      @display = "Queen"
+      @display = 'Queen'
       @value = 10
     elsif @value == 13
-      @display = "King"
+      @display = 'King'
       @value = 10
     end
   end
@@ -197,7 +189,7 @@ class Player
 
   def draw(n)
     result = []
-    n.times do |i|
+    n.times do |_i|
       card = Card.new(@game)
       @score += card.value
       @hand << card
