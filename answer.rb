@@ -34,8 +34,7 @@ class Game
 		@crecord = []
 		@score = 0
 		@hand = 0
-		@chand = 0
-		# keep record of each hand played - think of a way to save the value by player and AI	
+		@chand = 0	
 	end
 
 	def game_play
