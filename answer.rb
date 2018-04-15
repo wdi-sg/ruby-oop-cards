@@ -3,10 +3,10 @@ require 'byebug'
 # create loop for each turn of the game
 #check score - whether less than -2 - if not play, if yes, stop game
 # keep record of each hand played - think of a way to save the value by player and computer
-# inside game method, player draws 1 cards
-# Computer draws 1 cards
-# higher card gets 1 point
-# lower card deduct 1 point
+# inside game method, player draws 2 cards
+# Computer draws 2 cards
+# higher value gets 1 point
+# lower value deduct 1 point
 # add or minus score to player
 # puts score at every game
 # end game when score less than -2
