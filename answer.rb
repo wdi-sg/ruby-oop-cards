@@ -60,7 +60,6 @@ class Game
 				puts "#{@player1} lost! #{@player1} scored #{@score}."
 				puts "#{@player1} got #{@hand} while computer had #{@chand}."
 				puts "The record is #{@record}."
-				self
 			end
 		end
 	end
