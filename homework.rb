@@ -15,7 +15,6 @@ class Cards
 end
 
 
-
 class Game
 
 	def initialize
@@ -30,14 +29,25 @@ class Game
 		player_card = @deck.hit_me
 		computer_card = @deck.hit_me
 
+		player_bet = 1
+		if @score > 0
+			puts "#{@name}, your score is now #{@score}."
+			puts "Wager your score? Enter number of points to bet."
+			player_bet = gets.to_i
+			while player_bet > @score
+				puts "You don't have enough points. Try again."
+				player_bet = gets.to_i
+			end
+		end		
+
 		@hands_played.push << player_card
 		@hands_played.push << computer_card
 		# puts @hands_played
 
 		if player_card > computer_card
-			@score += 1
+			@score += player_bet
 		else
-			@score -= 1
+			@score -= player_bet
 		end
 		puts "You drew #{player_card} and Computer drew #{computer_card}. #{@name}, your score is now #{@score}"
 	end
@@ -57,15 +67,4 @@ end
 
 game = Game.new
 game.play_game
-
-
-
-
-
-
-
-
-
-
-
 
