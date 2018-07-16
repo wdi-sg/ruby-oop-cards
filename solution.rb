@@ -37,19 +37,28 @@ class Game
 end
 
 game = Game.new
+puts "Enter Your Name"
+name = gets.chomp
 
 while game.player_score > -2
   player_card = game.player_draw
-  puts "Player drew: #{player_card}"
+  puts "#{name} drew: #{player_card}"
 
   com_card = game.computer_draw
   puts "Computer drew: #{com_card}"
 
-  game.evaluate_game(player_card, com_card) ? (puts "Player Win") : (puts "Player Lose")
-  puts "Player Score: #{game.player_score}"
+  game.evaluate_game(player_card, com_card) ? (puts "#{name} Win") : (puts "#{name} Lose")
+  puts "#{name} Score: #{game.player_score}"
+
+  break if game.player_score <= -2
 
   if game.cards.length == 0
     puts "DECK IS OUT"
     break
   end
+
+  puts "Continue? Enter N to stop"
+  continue = gets.chomp
+
+  break if continue == 'N'
 end
