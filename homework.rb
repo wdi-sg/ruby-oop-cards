@@ -45,9 +45,13 @@ class Game
 	def play_game # keep going until cards are out or game is over.
 		while @deck.deck_empty == false && @score >= -2
 			play_round
+			puts "Play again? Y/N"
+			play_again = gets.chomp.downcase
+			if play_again == 'n'
+				break
+			end
 		end
 	end
-
 end	
 
 
