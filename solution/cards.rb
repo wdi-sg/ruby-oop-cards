@@ -1,3 +1,5 @@
+require 'byebug'
+
 class Cards
   def initialize
     @cards = []
