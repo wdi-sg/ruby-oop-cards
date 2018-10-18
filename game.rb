@@ -12,8 +12,9 @@ end
 
 # Game class that manages the card class and two players.
 class Game
-  attr_accessor :a_score, :b_score, :turn
-  def initialize
+  attr_accessor :a_name, :a_score, :b_score, :turn
+  def initialize(name)
+    @a_name = name
     @a_score = 0
     @b_score = 0
     @a_hand = []
@@ -32,9 +33,9 @@ class Game
   # Draw cards and add to player hands
   def deal(cards)
     @a_hand << cards.deck.shift
-    puts "Player One played #{@a_hand}"
+    puts "#{@a_name} played #{@a_hand}"
     @b_hand << cards.deck.shift
-    puts "Player Two played #{@b_hand}"
+    puts "Banker played #{@b_hand}"
   end
 
   # Compare drawn cards and assign points. Record hands after
@@ -46,7 +47,7 @@ class Game
       @b_score += 1
       @a_score -= 1
     end
-    puts "Player One: #{@a_score} points, Player Two: #{@b_score} points"
+    puts "#{@a_name}: #{@a_score} points, Banker: #{@b_score} points"
     record_hands
   end
 
@@ -62,13 +63,12 @@ class Game
   # Print out final game summary
   def report
     puts '*GAME ENDED*'
-    puts "Player One has #{@a_score} points."
-    puts "Player Two has #{@b_score} points."
-    puts '*WINNER*'
+    puts "#{@a_name} has #{@a_score} points."
+    puts "Banker has #{@b_score} points."
     if @a_score > @b_score
-      puts 'Player One has won the game!'
+      puts "#{@a_name} has won the game!"
     else
-      puts 'Player Two has won the game!'
+      puts 'Banker has won the game!'
     end
     puts '*MATCH HISTORY*'
     @history.each { |item| puts item.join }
@@ -78,7 +78,11 @@ end
 # Create new card object
 cards = Card.new
 # Create new game object
-play = Game.new
+puts 'Hi, what is your name?'
+name = gets.chomp
+if name == '' ? (name = 'Player') : name
+end
+play = Game.new(name)
 # Shuffle card object with Game class method
 play.shuffle_deck(cards)
 # Start game at turn 1
