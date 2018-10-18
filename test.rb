@@ -71,7 +71,7 @@ end
 # Inside the game class, keep a record of each hand played in an instance variable array.
 # Show the score to the player
 
-loop do
+
   puts "STARTING NEW GAME"
   game = Game.new
 
@@ -93,7 +93,7 @@ loop do
       abort
     end
   end
-end
+
 
 
 
