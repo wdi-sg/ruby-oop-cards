@@ -14,13 +14,15 @@ class Cards
 end
 # Create Game Class
 class Game
-  attr_accessor :score, :deck, :history
+  attr_reader :player_name
+  attr_accessor :score, :deck, :history, :wager
   def initialize
     # Get a new deck of shuffled cards
     @deck = Cards.new.cards.shuffle
-    @score = 0
+    @score = 2
     @history = []
-    puts @deck.to_s
+    puts "What is your name?"
+    @player_name=gets.chomp
   end
 
   def player_draw
@@ -33,11 +35,23 @@ class Game
 
   def score_game(player, comp)
     if player > comp
-      @score += 1
+      @score += @wager
       puts 'Player Won!!! Adding 1 Point'
     else
-      @score -= 1
+      @score -= @wager
       puts 'Player Lost. Subtracting 1 Point'
+    end
+  end
+
+  def wager
+    puts "How many points do you want to wager?"
+    @wager = gets.chomp.to_i
+    if @wager <= score
+      @wager = @wager
+    else
+      puts "That is not allowed. We will show hand for u"
+# I wanted to loop back to the top of the function to get the user to input the score again, but not sure how to do that.
+      @wager = score
     end
   end
 end
@@ -51,15 +65,20 @@ while game.score > -2
     # Otherwise there would be 2 extra Player drew Comp drew statements with nil values and code will break
     break
   end
+    game.wager
   player_card = game.player_draw
-  puts "Player drew #{player_card}"
+  puts "#{game.player_name} drew #{player_card}"
 
   comp_card = game.comp_draw
   puts "Comp drew #{comp_card}"
 # Push a record of each game into the history array
   game.history.push(["Player Card: #{player_card}","Computer Card: #{comp_card}"])
   game.score_game(player_card, comp_card)
-  puts "Player Score: #{game.score}"
+  puts "Hello #{game.player_name}, you have #{game.score} points"
+  puts "Do you want to continue with this game?"
+  answer = gets.chomp
+  # Rather than doing a yes/no, only end the game if player answers no
+  break if answer == "no"
 end
 # Show the history when end game
 puts "#{game.history}"
