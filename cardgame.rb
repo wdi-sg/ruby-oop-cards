@@ -23,18 +23,18 @@ class Game
   end
 
   def gameturn
-    @playercard = @deck[0]
-    @housecard = @deck[1]
+    playercard = @deck[0]
+    housecard = @deck[1]
     @handrecord += [@deck[0, 2]]
     @deck -= @deck[0, 2]
 
-    puts "You drew a #{@playercard} to the dealer's #{@housecard}."
+    puts "You drew a #{playercard} to the dealer's #{housecard}."
 
-    if @playercard > @housecard
+    if playercard > housecard
       @score += 1
       puts "+1 point"
 
-    elsif @playercard < @housecard
+    elsif playercard < housecard
       @score -= 1
       puts "-1 point"
 
