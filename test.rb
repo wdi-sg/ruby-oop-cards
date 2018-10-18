@@ -41,12 +41,11 @@ attr_accessor :cards
 end
 
 
-byebug
-puts "end"
 
 #Create a game class that uses the card class to play a game.
 
-class Game
+class
+  attr_accessor :deck, :score, :hands
   def initialize
     @deck = Cards.new.cards.shuffle
     @score = 0
@@ -72,6 +71,9 @@ class Game
 
 end
 
+
+byebug
+puts "end"
 
 
 
