@@ -80,7 +80,7 @@ cards = Card.new
 # Create new game object
 puts 'Hi, what is your name?'
 name = gets.chomp
-if name == '' ? (name = 'Player') : name
+if name.strip.empty? ? (name = 'Player') : name
 end
 play = Game.new(name)
 # Shuffle card object with Game class method
@@ -88,10 +88,15 @@ play.shuffle_deck(cards)
 # Start game at turn 1
 
 # Loop game while player scores not equal -2 or turn more than 26
-while play.a_score != -2 && play.b_score != -2
+loop do
   puts "*TURN #{play.turn}*"
   play.deal(cards)
   play.compare_hands
+  break if play.a_score == -2 || play.b_score == -2
+
+  puts 'Do you want to continue?'
+  break if gets.chomp.include? 'no'
+
   play.turn += 1
   break if play.turn == 27
 end
