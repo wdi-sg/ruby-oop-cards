@@ -32,41 +32,60 @@ class Game
 
     if playercard > housecard
       @score += 1
-      puts "+1 point"
+      puts "(+1 point)"
 
     elsif playercard < housecard
       @score -= 1
-      puts "-1 point"
-
+      puts "(-1 point)"
     end
   end
 end
 
-loop do
-  puts 'Welcome. Shuffling deck and starting new game.
-  Dealing cards...'
-  newgame = Game.new
+def initgame
+
+  puts 'Welcome. What is your name?'
+  playername = gets.chomp
 
   loop do
+    puts 'Shuffling deck and starting new game.
+    Dealing cards...'
+    newgame = Game.new
 
-    newgame.gameturn
+    loop do
 
-    puts "You have #{newgame.score} point(s)."
+      newgame.gameturn
 
-    if newgame.score < -2
-      break puts 'Game Over!'
-    elsif newgame.deck.size == 0
-      break puts 'No cards left to deal.'
+      puts "#{playername}, you have #{newgame.score} point(s)."
+
+      if newgame.score < -2
+        break puts 'Game Over!'
+      elsif newgame.deck.empty?
+        break puts 'No cards left to deal.'
+      else
+        puts 'Do you wish to continue playing?'
+        cont = gets.chomp.downcase
+        if cont == 'no' || cont == 'n'
+          break
+        end
+      end
+    end
+
+    puts "Your final score is #{newgame.score}.
+    Hands played (Your card, Dealer's card): #{newgame.handrecord}
+    Would you like to play again?"
+
+    reply = gets.chomp.downcase
+
+    if reply != 'yes' && reply != 'y'
+      return
     end
   end
-
-  puts "Your final score is #{newgame.score}.
-  Hands played (Your card, Dealer's card): #{newgame.handrecord}
-  Would you like to play again?"
-
-  reply = gets.chomp.downcase
-
-  if reply != 'yes' && reply != 'y'
-    return
-  end
 end
+
+
+initgame
+
+
+
+
+
