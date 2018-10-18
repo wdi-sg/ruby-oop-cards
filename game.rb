@@ -4,7 +4,7 @@ require './cards'
 
 class Game
   #why can't i use the inheritance method to get the draw_card method?
-  attr_accessor :score
+  attr_accessor :score, :bet
 
   def initialize
     super
@@ -12,7 +12,8 @@ class Game
     @score = 0
   end
 
-  def gamePlay
+  def gamePlay (bet)
+    @bet = bet
     player_card = @deck.draw_card
     puts "Player drew #{player_card}"
 
@@ -21,8 +22,12 @@ class Game
 
     if player_card > opponent_card
       @score += 1
+      bet += 1000
+      puts "Your current money contains #{bet}"
     else
       @score -= 1
+      bet -= 1000
+      puts "Your current money contains #{bet}"
     end
   end
 

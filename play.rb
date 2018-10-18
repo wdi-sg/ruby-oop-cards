@@ -4,8 +4,12 @@ require './cards'
 game = Game.new()
 puts "Please enter your name: "
 input = gets.chomp
+
+puts "How much would you like to wager/bet?"
+bet = gets.chomp.to_i
+
 while game.score > -2
-  game.gamePlay
+  game.gamePlay (bet)
   puts "hello #{input}, your current score is #{game.score}"
   puts "Would you like to continue the game? (Y/N)"
   ans = gets.chomp
