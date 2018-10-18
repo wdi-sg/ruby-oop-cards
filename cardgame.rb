@@ -17,12 +17,26 @@ class Game
   attr_reader :score
 
   def initialize
+
     @deck = Deck.new.cards.shuffle
     @handrecord = []
-    @score = 0
+    puts 'How much would you like to buy in for ($)?'
+    @score = gets.chomp.to_i
   end
 
   def gameturn
+
+    loop do
+      puts 'How much would you like to wager on this round ($)?'
+      @wager = gets.chomp.to_i
+
+      if @wager > @score
+        puts "You don't have that much. Try again."
+      elsif @wager <= @score && @wager > 0
+        break
+      end
+    end
+
     playercard = @deck[0]
     housecard = @deck[1]
     @handrecord += [@deck[0, 2]]
@@ -31,12 +45,12 @@ class Game
     puts "You drew a #{playercard} to the dealer's #{housecard}."
 
     if playercard > housecard
-      @score += 1
-      puts "(+1 point)"
+      @score += @wager
+      puts "(+$#{@wager})"
 
     elsif playercard < housecard
-      @score -= 1
-      puts "(-1 point)"
+      @score -= @wager
+      puts "(-$#{@wager})"
     end
   end
 end
@@ -47,18 +61,21 @@ def initgame
   playername = gets.chomp
 
   loop do
-    puts 'Shuffling deck and starting new game.
-    Dealing cards...'
+
     newgame = Game.new
+
+    puts 'Shuffling the deck and starting a new game.
+
+    Dealing cards...'
 
     loop do
 
       newgame.gameturn
 
-      puts "#{playername}, you have #{newgame.score} point(s)."
+      puts "#{playername}, you have $#{newgame.score}."
 
-      if newgame.score < -2
-        break puts 'Game Over!'
+      if newgame.score <= 0
+        break puts "You've lost your buy-in! Game Over."
       elsif newgame.deck.empty?
         break puts 'No cards left to deal.'
       else
@@ -70,7 +87,7 @@ def initgame
       end
     end
 
-    puts "Your final score is #{newgame.score}.
+    puts "You cashed out $#{newgame.score}.
     Hands played (Your card, Dealer's card): #{newgame.handrecord}
     Would you like to play again?"
 
