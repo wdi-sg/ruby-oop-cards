@@ -54,8 +54,8 @@ class Game
   end
 
   def play
-    user_hand = @deck.show_card
-    house_hand = @deck.show_card
+    user_hand = @deck.draw_card
+    house_hand = @deck.draw_card
 
     @hands << [user_hand, house_hand]
 
