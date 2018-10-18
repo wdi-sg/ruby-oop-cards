@@ -37,12 +37,14 @@ end
 # Create a game class that uses the card class to play a game.
 
 class Game
-  attr_accessor :deck, :score, :hands
+  attr_accessor :deck, :score, :hands, :name
 
   def initialize
+    puts "what is your name"
     @deck = Cards.new.cards.shuffle
     @score = 0
     @hands = []
+    @name = gets.chomp
   end
 
   def play
@@ -53,10 +55,10 @@ class Game
 
     if user_hand > house_hand
       @score += 1
-      puts "Your card: #{user_hand}, computer: #{house_hand}"
+      puts "#{@name}'s card: #{user_hand}, computer: #{house_hand}"
     else
       @score -= 1
-      puts "Your card: #{user_hand}, computer: #{house_hand}"
+      puts "#{@name}'s card: #{user_hand}, computer: #{house_hand}"
     end
   end
 
@@ -86,7 +88,8 @@ loop do
     end
 
     if game.check_game <= -2
-      puts "YOU LOOSE LOL"
+      puts "YOU LOOOOOOOOOSE LOL"
+      puts "FINAL SCORE: #{game.check_game.to_s}"
       abort
     end
   end
