@@ -21,7 +21,7 @@ require 'byebug'
 # puts "SCORE: Player1 = #{playerOneScore}, player2 = #{playerTwoScore}"
 
 
-#Create a card class that, when you initialize it, creates an array of "cards" that are of value 1-52.
+# Create a card class that, when you initialize it, creates an array of "cards" that are of value 1-52.
 
 class Cards
 attr_accessor :cards
@@ -30,22 +30,15 @@ attr_accessor :cards
     @cards = Array.new(52) {|i| i+1 }
   end
 
-  def shuffle_cards
-    @cards.shuffle
-  end
-
-  def draw_card
-    @cards.pop
-  end
-
 end
 
 
 
-#Create a game class that uses the card class to play a game.
+# Create a game class that uses the card class to play a game.
 
-class
+class Game
   attr_accessor :deck, :score, :hands
+
   def initialize
     @deck = Cards.new.cards.shuffle
     @score = 0
@@ -53,15 +46,17 @@ class
   end
 
   def play
-    user_hand = @deck.draw_card
-    house_hand = @deck.draw_card
+    user_hand = @deck.pop
+    house_hand = @deck.pop
 
     @hands << [user_hand, house_hand]
 
     if user_hand > house_hand
       @score += 1
+      puts "Your card: #{user_hand}, computer: #{house_hand}"
     else
       @score -= 1
+      puts "Your card: #{user_hand}, computer: #{house_hand}"
     end
   end
 
@@ -71,11 +66,35 @@ class
 
 end
 
+# Inside the game class, keep a record of each hand played in an instance variable array.
+# Show the score to the player
 
-byebug
-puts "end"
+loop do
+  puts "STARTING NEW GAME"
+  game = Game.new
+
+
+  loop do
+    game.play
+    puts "CURRENT SCORE: #{game.check_game.to_s}"
+    puts "CONTINUE?"
+
+    answer = gets.chomp
+
+    if answer == "no"
+      abort
+    end
+
+    if game.check_game <= -2
+      puts "YOU LOOSE LOL"
+      abort
+    end
+  end
+end
 
 
 
+# byebug
+# puts "end"
 
 
