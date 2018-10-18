@@ -18,6 +18,7 @@ class Game
 
     opponent_card = @deck.draw_card
     puts "Player drew #{opponent_card}"
+
     if player_card > opponent_card
       @score += 1
     else
