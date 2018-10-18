@@ -8,7 +8,7 @@ class Game
   def play
     user_hand = @deck.show_card
     house_hand = @deck.show_card
-    puts "in play"
+
     @hands << [user_hand, house_hand]
 
     if user_hand > house_hand
