@@ -55,7 +55,7 @@ class Game
     record = []
     a = format '%02d', @a_hand.shift
     b = format '%02d', @b_hand.shift
-    record << "#{format '%02d', @turn}: #{a} vs #{b}"
+    record << "#{@turn}: #{a} vs #{b}"
     @history << record
   end
 
