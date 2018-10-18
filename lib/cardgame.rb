@@ -34,11 +34,13 @@ class Game
 
   def play_game
 
-    @user_cards << @deck.get_cards
-    puts "You drew #{user_card}."
+    @user_cards = []
+     @user_cards << @deck.get_cards
+    puts "You drew #{user_cards}."
 
+    @bot_cards = []
     @bot_cards << @deck.get_cards
-    puts "Bot drew #{bot_card}"
+    puts "Bot drew #{bot_cards}."
 
     if @user_cards.max > @bot_cards.max
       @score += 1
