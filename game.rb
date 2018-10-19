@@ -58,29 +58,34 @@ class Game
 		name = gets.chomp
 		repeat = true
 		
-		puts "Ok. Let's see who draws the higher card."
-		
+		bet = 0
+
+		while bet == 0
+			puts "Ok. Let's see who draws the higher card. How many points do you want to bet per round?"
+			bet = gets.chomp.to_i
+		end
+
 		while repeat == true
 			player_hand = @deck.draw
 			dealer_hand = @deck.draw
-		
+			
 			puts "You drew a #{player_hand.rank} of #{player_hand.suit_text}. The dealer drew a #{dealer_hand.rank} of #{dealer_hand.suit_text}."
+			puts "#{@deck.cards.length} cards left in deck."
 		
 			if player_hand.rank > dealer_hand.rank
-				@points += 1
+				@points += bet
 				puts 'You won this hand.'
 			elsif player_hand.rank < dealer_hand.rank
-				@points -= 1
+				@points -= bet
 				puts 'You lost this hand.'
 			elsif player_hand.rank == dealer_hand.rank
-				if player_hand.suit > dealer_hand.suit
-					@points += 1
-				puts 'You won this hand.'
-				else
-					@points -= 1
-					puts 'You lost this hand.'
-				end
+				puts 'This hand was a draw.'
 			end
+
+			# if @points < -2
+			# 	puts "You lost. Better luck next time!"
+			# 	return
+			# end
 		
 			choice = ''
 		
