@@ -48,16 +48,18 @@ end
 
   while playing
       tryout.play
-      
+      puts "Hi player, your current score is #{tryout.check_game.to_s}"
+
       puts "Do you want to play this hand? (Y/N)"
+
       choice = gets.chomp
 
       if choice == "N"
         puts "Folding Card"
-        next;
+        next
       end
 
-      puts "Hi player, your current score is #{tryout.check_game.to_s}"
+
 
       if tryout.check_game < -2
         playing false
