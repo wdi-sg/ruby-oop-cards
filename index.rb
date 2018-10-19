@@ -48,7 +48,7 @@ class Game
     @round = 0
     @player_one = nil
     @player_two = nil
-    @points = 0
+    @points = 1000
     @hands = []
     @continue = "yes"
     @bet = 1
@@ -73,10 +73,10 @@ class Game
 
     if @player_one > @player_two
       puts 'Player one wins'
-      @points += 1
+      @points += @bet
     else
       puts 'Player two wins'
-      @points -= 1
+      @points -= @bet
     end
   end
 
@@ -107,6 +107,7 @@ loop do
 
   puts "This is round #{game_one.round}"
 
+  game_one.bet
   game_one.draw_two
   puts game_one.deck.cards.length
 
