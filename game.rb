@@ -21,7 +21,7 @@ class Card
 end
 
 class Deck
-attr_reader :cards
+	attr_reader :cards
 
 	def initialize
 		@cards = []
@@ -43,9 +43,6 @@ attr_reader :cards
 		cards.pop
 	end
 end
-
-# still need this?
-deck = Deck.new
 
 class Game
 	attr_reader :points
