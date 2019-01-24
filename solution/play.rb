@@ -9,7 +9,7 @@ while playing
 
   game.play
   puts "current score is: #{game.check_game.to_s}"
-
+  card.get_card
   puts "do you want to play this hand?"
 
   answer = gets.chomp
