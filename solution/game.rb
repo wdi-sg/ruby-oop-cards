@@ -12,6 +12,9 @@ class Game
 
   def show
 
+    puts "How much do you want to wager?"
+    wager = gets.to_i
+
     house_hand = @deck.show_card
     puts "house's hand is #{house_hand}"
 
@@ -19,8 +22,12 @@ class Game
 
     if @user_hand > house_hand
       @score += 1
+      puts "You won"
+      @score += wager
     else
       @score -= 1
+      puts "The house won."
+      @score -= wager
     end
   end
 
