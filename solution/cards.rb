@@ -14,3 +14,5 @@ class Cards
     @cards.shuffle.pop
   end
 end
+
+# puts Cards.new.get_card
