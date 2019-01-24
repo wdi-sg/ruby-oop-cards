@@ -45,6 +45,10 @@ class Game
             end
         end
 
+        def score
+            @score
+        end
+
 end
 
 card = Card.new
@@ -58,6 +62,12 @@ loop do
         break
     elsif card.deck.length==0
         puts "No more cards. #{player_name} won. game over."
+        break
+    end
+    puts "Do you want to continue to play the game? [y/n]"
+    continue = gets.chomp
+    if continue == 'n'
+        puts "#{player_name}, your final score is #{game.score}. Thank you for playing this game. Goodbye."
         break
     end
 end
