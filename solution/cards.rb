@@ -1,9 +1,6 @@
 class Cards
   def initialize
-    @cards = []
-    52.times do |number|
-      @cards << number
-    end
+    @cards = (1..52).to_a
   end
 
   def show_card
