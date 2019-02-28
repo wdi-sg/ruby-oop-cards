@@ -8,6 +8,7 @@ class Cards
 
   def show_card
     @cards.shuffle.first
+    @cards.shuffle.next
   end
 
   def get_card
