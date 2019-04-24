@@ -58,15 +58,17 @@ class Game
 
     if @player_one_hand[0] > @player_two_hand[0]
 
-      @player_one_point = @player_one_point + 1
-      @player_two_point = @player_two_point - 1
+      @player_one_point = @player_one_point + @amount + @amount
+      @player_two_point = @player_two_point
       # puts @player_one_point
+      puts "#{$p_one_name} won the round!"
       puts "#{$p_one_name} point is " + @player_one_point.to_s
       puts "#Computer point is " + @player_two_point.to_s
      else
       # puts "Player 2 Wins"
-      @player_two_point = @player_two_point + 1
-      @player_one_point = @player_one_point - 1
+      @player_two_point = @player_two_point + @amount + @amount
+      @player_one_point = @player_one_point
+      puts "#Computer won the round!"
       puts "#{$p_one_name} point is " + @player_one_point.to_s
       puts "#Computer point is " + @player_two_point.to_s
     end
@@ -89,23 +91,37 @@ class Game
     puts "#Computer point is " + @player_two_point.to_s
   end
 
+  def bet(amount)
+    puts amount.to_s + " bet!"
+    @amount = amount
+    # puts @amount.to_s + "esfvdgrdfbf"
+    @player_one_point = @player_one_point - amount
+    @player_two_point = @player_two_point - amount
+    puts @player_one_point.to_s + "ewfwefwef"
+    puts @player_two_point.to_s + "etgerfv c"
+  end
 
 end
 
-game_round = Game.new(card_deck.cards, 0, 0);
+game_round = Game.new(card_deck.cards, 3, 3);
 # print game_round.deck
 
+# game_round.bet(1);
+
+until game_round.player_one_point <= -2 || game_round.player_two_point <= -2
+  puts "Bet amount?"
+  bet_amount = gets.chomp
+  game_round.bet(bet_amount.to_i)
+
+  puts game_round.player_one_point.to_s + "AFDSafds"
+
   game_round.draw
   game_round.deal
   puts "Do you still want to continue? Y/N"
   player_answer = gets.chomp.upcase
-
-
-until game_round.player_one_point == -2 || game_round.player_two_point == -2 || player_answer == 'N'
-  game_round.draw
-  game_round.deal
-  puts "Do you still want to continue? Y/N"
-  player_answer = gets.chomp.upcase
+  if player_answer == 'N'
+    break
+  end
 end
 
 game_round.calculate
