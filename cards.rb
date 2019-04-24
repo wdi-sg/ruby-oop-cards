@@ -9,10 +9,6 @@ class Cards
     @cards
   end
 
-  def draw_card()
-    @cards.sample(2)
-  end
-
 end
 
 # new_cards = Cards.new()
@@ -23,16 +19,27 @@ end
 
 class Game
 
-  def initialize(deck, player, dealer)
+  def initialize(deck, player1, player2)
     @deck = deck
-    @player = player
-    @dealer = dealer
+    @player1 = player1
+    @player2 = player2
   end
 
-  def player()
-    @player
+  def deck
+    @deck
   end
 
+  def draw
+    @new_deck = deck.shuffle
+  end
+
+  def player1
+    @player1
+  end
+
+  def player2
+    @player2
+  end
 
 
 end
