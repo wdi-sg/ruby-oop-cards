@@ -69,4 +69,9 @@ puts "Game Start, press Enter to draw cards:"
 while game.player_1_points > -2 && game.player_2_points > -2 do
     gets.chomp
     game.drawCards
+    if game.player_1_points < -1
+        puts "Player 2 won!"
+    elsif game.player_2_points < -1
+        puts "player 1 won!"
+    end
 end
