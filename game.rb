@@ -1,23 +1,25 @@
 require_relative 'cards'
+require_relative 'engine'
 
 class Play
-  deck = Cards.new()
 
+  # if the player's score is less than -2, end the game.
 
-  print "What's your name? "
-  player_name = gets.chomp
-  player_name.capitalize!
-  puts "Hello #{player_name}!"
-  print "Do you want to play? (yes/no) "
-  play = gets.chomp
-  while play == "yes"
-    # player draws two cards
-    # if the player has the highest card, give them a point.
-    # if the player doesn't have the highest card, deduct a point.
-    # if the player's score is less than -2, end the game.
+  # record of each hand played
 
-  end
+  # show the score to the player
+  # game ends
+  # display winner and scores
+
 end
+
+print "What's your name? "
+player_name = gets.chomp
+player_name = player_name.capitalize!
+
+game = Game.new(player_name)
+
+game.play_round
 
 # deck = Cards.new()
 # p "created deck: #{deck.cards}"

@@ -1,7 +1,7 @@
 class Cards
   # fill in this class body
   def initialize()
-    @cards = (1...52).to_a
+    @cards = (1...52).to_a.shuffle!
   end
 
   def cards
@@ -9,7 +9,7 @@ class Cards
   end
 
   def draw
-    @drawn = @cards.sample(2)
+    @cards.sample(2)
   end
 
 end
