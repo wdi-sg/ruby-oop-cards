@@ -16,7 +16,7 @@ game = Game.new(cards, player, dealer)
 until game.game_end?
   game.play_game(game.place_bet())
 
-  puts "#{ game.player.name }, do you still want to fold the game (Y)?"
+  puts "#{ game.player.name }, do you want to fold the game (Y)?"
   continue_game = gets.chomp
 
   if (continue_game == "Y")

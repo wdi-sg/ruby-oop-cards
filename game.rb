@@ -29,7 +29,7 @@ class Game
   end
 
   def place_bet ()
-      puts "#{ @player.name }, please place your bet! (#{ @player.score } points available for betting)"
+      puts "#{ @player.name }, you have #{ @player.score } points available for betting. Please place your bet!"
       bet = gets.chomp.to_i
   end
 
@@ -38,13 +38,20 @@ class Game
       player_card = draw_card()
       dealer_card = draw_card()
 
-      if player_card > dealer_card
+      puts "Player Drawn Card: #{ player_card.name.capitalize } of #{ player_card.suite.capitalize } vs Dealer Drawn Card: #{ dealer_card.name.capitalize } of #{ dealer_card.suite.capitalize } "
+
+      if player_card.number > dealer_card.number
+        puts "#{ @player.name }, you have won #{ bet } points!"
         @player.add_score(bet)
+
+      elsif player_card.number == dealer_card.number && player_card.suite_weightage > dealer_card.suite_weightage
+          puts "#{ @player.name }, you have won #{ bet } points!"
+          @player.add_score(bet)
+
       else
+        puts "#{ @player.name }, you have lost #{ bet } points!"
         @player.deduct_score(bet)
       end
-
-      puts "Player Card: #{ player_card } vs Dealer Card: #{ dealer_card }"
   end
 
   def game_end? ()
