@@ -1,5 +1,5 @@
 class Cards
-  # fill in this class body
+
   def initialize()
     @cards = (1...52).to_a.shuffle!
   end

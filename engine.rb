@@ -20,16 +20,11 @@ class Game
 
     # add drawn cards to pile
     @played << @drawn
-    print @played
+    # print @played
   end
 
-  def check_win
-    if @deck.length == 0
-      print "Game over! #{name} scored #{score.to_s} points!"
-    elseif @score < -2
-      print "Game over! #{name} lost!"
-
-    end
+  def check_score
+    @score
   end
 
 end
