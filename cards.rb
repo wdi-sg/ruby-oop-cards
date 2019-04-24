@@ -1,6 +1,9 @@
 require './card'
 
 class Cards
+
+  attr_accessor :cards
+
   ###############
   # constructor
   ###############
@@ -14,13 +17,6 @@ class Cards
       end
     end
 
-  end
-
-  ######################
-  # get methods
-  ######################
-  def cards()
-    @cards
   end
 
 end

@@ -1,4 +1,7 @@
 class Card
+
+  attr_accessor :number, :suite, :name, :suite_weightage
+
   ###############
   # constructor
   ###############
@@ -27,24 +30,5 @@ class Card
     elsif (suite == "spades")
       @suite_weightage = 4
     end
-  end
-
-  ######################
-  # get methods
-  ######################
-  def suite()
-    @suite
-  end
-
-  def number()
-    @number
-  end
-
-  def name()
-    @name
-  end
-
-  def suite_weightage()
-    @suite_weightage
   end
 end

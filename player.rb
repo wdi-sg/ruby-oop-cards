@@ -1,22 +1,13 @@
 class Player
 
+  attr_accessor :name, :score
+
   ###############
   # constructor
   ###############
   def initialize(name, score)
     @name = name
     @score = score
-  end
-
-  ######################
-  # get methods
-  ######################
-  def name()
-    @name
-  end
-
-  def score()
-    @score
   end
 
   ######################

@@ -1,5 +1,7 @@
 class Game
 
+  attr_accessor :player
+
   ###############
   # constructor
   ###############
@@ -7,13 +9,6 @@ class Game
     @deck = deck
     @player = player
     @dealer = dealer
-  end
-
-  ######################
-  # get methods
-  ######################
-  def player()
-    @player
   end
 
   ###############
