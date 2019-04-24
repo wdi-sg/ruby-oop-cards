@@ -50,7 +50,11 @@ class Game
   end
 
   def game_end? ()
-    if @deck.cards.length == 0 || @player.score < -2
+    if @deck.cards.length == 0
+      puts "The deck has run out of cards! Game over!."
+      return true
+    elsif @player.score < -2
+      puts "You have lost all your points! Game over!"
       return true
     end
 

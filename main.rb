@@ -25,5 +25,3 @@ until game.game_end?
   end
 
 end
-
-puts "Game end!"
