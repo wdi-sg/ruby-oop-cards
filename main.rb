@@ -38,9 +38,9 @@ class Game
 
     def drawCards
         @player_1_hand << @deck.cards.slice!(0)
-        p @player_1_hand
+        puts "player 1 drew: " + @player_1_hand[@turn].value.to_s
         @player_2_hand << @deck.cards.slice!(0)
-        p @player_2_hand
+        puts "player 2 drew: " + @player_2_hand[@turn].value.to_s
         if @player_1_hand[@turn].value > @player_2_hand[@turn].value
             @player_1_points+=1
             @player_2_points-=1
@@ -53,7 +53,19 @@ class Game
         @turn+=1
     end
 
+    def player_1_points
+        @player_1_points
+    end
+
+    def player_2_points
+        @player_2_points
+    end
+
+
 end
 
 game = Game.new
-gets.chomp
+while game.player_1_points > -2 && game.player_2_points > -2 do
+    gets.chomp
+    game.drawCards
+end
