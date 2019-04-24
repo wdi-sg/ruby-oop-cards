@@ -13,7 +13,7 @@ dealer = Player.new("Dealer", 0)
 
 game = Game.new(cards, player, dealer)
 
-until game.game_end?
+until game.game_end? == true
   game.play_game(game.place_bet())
 
   puts "#{ game.player.name }, do you want to fold the game (Y)?"

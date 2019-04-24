@@ -1,6 +1,6 @@
 class Card
 
-  attr_accessor :number, :suite, :name, :suite_weightage
+  attr_accessor :number, :suite, :name, :suite_weightage, :symbol
 
   ###############
   # constructor
@@ -29,6 +29,16 @@ class Card
       @suite_weightage = 3
     elsif (suite == "spades")
       @suite_weightage = 4
+    end
+
+    if (suite == "diamonds")
+      @symbol = "♦"
+    elsif (suite == "clubs")
+      @symbol = "♣"
+    elsif (suite == "hearts")
+      @symbol = "♥"
+    elsif (suite == "spades")
+      @symbol = "♠"
     end
   end
 end

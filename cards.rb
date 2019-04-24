@@ -16,7 +16,6 @@ class Cards
         @cards.push(card)
       end
     end
-
   end
 
 end

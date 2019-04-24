@@ -33,7 +33,7 @@ class Game
       player_card = draw_card()
       dealer_card = draw_card()
 
-      puts "Player Drawn Card: #{ player_card.name.capitalize } of #{ player_card.suite.capitalize } vs Dealer Drawn Card: #{ dealer_card.name.capitalize } of #{ dealer_card.suite.capitalize } "
+      puts "Player Drawn Card: #{ player_card.name.capitalize } of #{ player_card.symbol } #{ player_card.suite.capitalize } vs Dealer Drawn Card: #{ dealer_card.name.capitalize } of #{ dealer_card.symbol } #{ dealer_card.suite.capitalize } "
 
       if player_card.number > dealer_card.number
         puts "#{ @player.name }, you have won #{ bet } points!"
