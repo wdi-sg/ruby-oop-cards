@@ -14,10 +14,9 @@ dealer = Player.new("Dealer", 0)
 game = Game.new(cards, player, dealer)
 
 until game.game_end?
+  game.play_game(game.place_bet())
 
-  game.play_game()
-
-  puts "#{ player_name }, do you still want to fold the game (Y)?"
+  puts "#{ game.player.name }, do you still want to fold the game (Y)?"
   continue_game = gets.chomp
 
   if (continue_game == "Y")

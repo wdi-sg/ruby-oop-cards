@@ -11,6 +11,10 @@ class Player
   ######################
   # get methods
   ######################
+  def name()
+    @name
+  end
+
   def score()
     @score
   end
@@ -18,12 +22,12 @@ class Player
   ######################
   # methods
   ######################
-  def add_score()
-    @score += 1
+  def add_score(n)
+    @score += n
   end
 
-  def deduct_score()
-    @score -= 1
+  def deduct_score(n)
+    @score -= n
   end
 
 end
