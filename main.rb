@@ -65,6 +65,7 @@ class Game
 end
 
 game = Game.new
+puts "Game Start, press Enter to draw cards:"
 while game.player_1_points > -2 && game.player_2_points > -2 do
     gets.chomp
     game.drawCards
