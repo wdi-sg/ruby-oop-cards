@@ -24,41 +24,69 @@ class Deck
     end
 end
 
+class Player
+
+    def initialize name
+        @hand = []
+        @points = 0.to_i
+        @name = name
+    end
+
+    def hand
+        @hand
+    end
+
+
+    def points
+        @points
+    end
+
+    def set_points x
+        @points = @points + x
+    end
+
+    def name
+        @name
+    end
+
+end
+
 class Game
+
     def initialize 
         deck = Deck.new
         deck.cards.shuffle!
         @deck = deck
-        @player_1_hand = []
-        @player_2_hand = []
-        @player_1_points = 0
-        @player_2_points = 0
+        puts "Player 1, what is your name?"
+        @player_1 = Player.new(gets.chomp)
+        puts "Player 2, what is your name?"
+        @player_2 = Player.new(gets.chomp)
         @turn = 0
     end
-
+    
     def drawCards
-        @player_1_hand << @deck.cards.slice!(0)
-        puts "player 1 drew: " + @player_1_hand[@turn].value.to_s
-        @player_2_hand << @deck.cards.slice!(0)
-        puts "player 2 drew: " + @player_2_hand[@turn].value.to_s
-        if @player_1_hand[@turn].value > @player_2_hand[@turn].value
-            @player_1_points+=1
-            @player_2_points-=1
+        @player_1.hand << @deck.cards.slice!(0)
+        puts @player_1.name + " drew: " + @player_1.hand[@turn].value.to_s
+        @player_2.hand << @deck.cards.slice!(0)
+        puts @player_2.name + " drew: " + @player_2.hand[@turn].value.to_s
+        if @player_1.hand[@turn].value > @player_2.hand[@turn].value
+            @player_1.set_points(1)
+            @player_2.set_points(-1)
         else
-            @player_2_points+=1
-            @player_1_points-=1
+            @player_2.set_points(1)
+            @player_1.set_points(-1)
         end
-        puts "player 1 points is: " + @player_1_points.to_s
-        puts "player 2 points is: " + @player_2_points.to_s
+        puts @player_1.name + "\'s point total is: " + @player_1.points.to_s
+        puts @player_2.name + "\'s point total is: " + @player_2.points.to_s
         @turn+=1
     end
 
-    def player_1_points
-        @player_1_points
+    def player_1
+        @player_1
     end
 
-    def player_2_points
-        @player_2_points
+    def player_2
+        @player_2
     end
 
 
@@ -66,12 +94,12 @@ end
 
 game = Game.new
 puts "Game Start, press Enter to draw cards:"
-while game.player_1_points > -2 && game.player_2_points > -2 do
+while game.player_1.points > -2 && game.player_2.points > -2 do
     gets.chomp
     game.drawCards
-    if game.player_1_points < -1
-        puts "Player 2 won!"
-    elsif game.player_2_points < -1
-        puts "player 1 won!"
+    if game.player_1.points < -1
+        puts game.player_2.name + " won!"
+    elsif game.player_2.points < -1
+        puts game.player_1.name + " won!"
     end
 end
