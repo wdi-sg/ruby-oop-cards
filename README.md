@@ -6,9 +6,9 @@ Create a game of cards using ruby objects.
 1. Create a card class that, when you initialize it, creates an array of "cards" that are of value 1-52.
 
 1. Create a game class that uses the card class to play a game.
-  - when you play the game, draw two cards from the deck.
-  - if the player has the highest card, give them a point.
-  - if the player doesn't have the highest card, deduct a point.
+  - when you play the game, draw two cards from the deck. ✅
+  - if the player has the highest card, give them a point. ✅
+  - if the player doesn't have the highest card, deduct a point. ✅
   - if the player's score is less than -2, end the game.
 
 1. Inside the game class, keep a record of each hand played in an instance variable array.
