@@ -9,21 +9,6 @@ class Game
     @dealer = dealer
   end
 
-  ######################
-  # get methods
-  ######################
-  def player ()
-    @player
-  end
-
-  def dealer ()
-    @dealer
-  end
-
-  def deck ()
-    @deck
-  end
-
   ###############
   # methods
   ###############
@@ -34,6 +19,20 @@ class Game
 
   def game_score ()
     puts "Player Score: #{ @player.score }"
+  end
+
+  def play_game ()
+      # player and dealer each draw a card
+      player_card = draw_card()
+      dealer_card = draw_card()
+
+      if player_card > dealer_card
+        @player.add_score()
+      else
+        @player.deduct_score()
+      end
+
+      puts "Player Card: #{ player_card } vs Dealer Card: #{ dealer_card }"
   end
 
   def game_end? ()

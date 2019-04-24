@@ -9,18 +9,21 @@ class Player
   end
 
   ######################
-  # get and set methods
+  # get methods
   ######################
-  def name()
-    @name
-  end
-
   def score()
     @score
   end
 
-  def set_score(score)
-    @score = score
+  ######################
+  # methods
+  ######################
+  def add_score()
+    @score += 1
+  end
+
+  def deduct_score()
+    @score -= 1
   end
 
 end
