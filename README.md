@@ -1,4 +1,4 @@
-# ruby-oop-cards
+# ruby-oop-cards~~~~~~~~
 ![https://media.giphy.com/media/w1ZEcSm7LiuLC/giphy.gif](https://media.giphy.com/media/w1ZEcSm7LiuLC/giphy.gif)
 
 Create a game of cards using ruby objects.
