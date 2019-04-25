@@ -17,11 +17,12 @@ class Card_deck
   def get_card
     # num = rand(0..@deck.length-1)
     @value_of_card = @deck.shuffle.first
+    @deck.shift
     @value_of_card
     # "hello your drew a card valued at #{@value_of_card[0]}...suited at  #{@value_of_card[1]} .... CARDS LEFTTTT in DECK #{@deck.length}"
   end
 
   def show_deck
-    @deck.shuffle.pop
+    @deck
   end
 end

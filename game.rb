@@ -6,6 +6,7 @@ class Game
     @deck = Card_deck.new
     @score = 0
     @hands = []
+    @player_wage = []
 
     # @playerCard =
   end
@@ -48,12 +49,18 @@ class Game
     @score
   end
 
+  def wager(amount)
+
+    @player_wage << amount
+    @player_wage
+
+  end
   # def deck
   #   @deck.show_deck.length
   # end
 
-  # def cards_left
-  #   @deck.show_deck.length
-  # end
+  def cards_left
+    @deck.show_deck.length
+  end
 
 end

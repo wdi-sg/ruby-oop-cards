@@ -6,7 +6,7 @@ playing = true
 
 game = Game.new
 
-# Ask the player for their name at the beggining of the game, and print it out at each turn. Example: "hello Ray, you have 10 points."
+
 print "What is your name"
 puts
 @player_name = gets.chomp
@@ -14,11 +14,34 @@ puts
 
 while playing
 
+
+  print "Wager on it?"
+  puts
+  @wager = gets.chomp
+  if @wager == 'no'
+    @wager = 0
+  else
+    game.wager(@wager)
+    puts "Lad placed a bet of #{@wager}"
+  end
+
+
+
+
   game.play
   # puts game.deck
   puts "#{@player_name}, your current score is: #{game.game_status}"
 
-  puts "draw again?"
+  puts "draw again? \n"
+
+
+  if game.game_status <= -1
+    playing = false
+    puts "You loseeeee \n "
+    puts "#{game.wager} \n"
+  end
+
+
 
   answer = gets.chomp
   if answer == "no"
@@ -26,8 +49,8 @@ while playing
     next
   end
 
-  if game.game_status < -2
-    playing = false
-    puts "You loseeeee"
+  if game.cards_left == 0
+    puts "Lucky baster, #{@player_name} Wins!"
   end
+
 end
