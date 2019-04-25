@@ -8,10 +8,12 @@ end
 
   def show_card
     @cards.shuffle.first
+    puts show_card
   end
 
   def get_card
     @cards.shuffle.pop
+    puts get_card
   end
 end
 
@@ -34,6 +36,9 @@ class Game
       @score -=1
     end
   end
+
+  puts user_hand
+  puts house_hand
 
   def check_game
     @score
