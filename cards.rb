@@ -55,10 +55,38 @@ class Game
   end
 
   def total_score
-   p @score
+    @score
   end
 end
 
+
+
+##### PLAY TIME #####
+
 game = Game.new
-game.play
-game.total_score
+#game.play
+#game.total_score
+current_score = game.total_score
+
+  puts "Enter your name: "
+  player = gets.chomp
+  puts "Hello #{player}!"
+
+  while true
+    puts "You have #{current_score} points.\n1: Play\n2: End Game"
+    choice = gets.chomp.to_i
+
+    if choice == 1
+      game.play
+      current_score = game.total_score
+
+      if current_score == -2
+        puts "You lost the game!"
+        break
+      end
+
+    elsif choice == 2
+      puts "Your final score is #{current_score}!"
+      break;
+    end
+  end
