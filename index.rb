@@ -1,6 +1,32 @@
+class Card
+  	def initialize(rank, suit, value)
+	  	@rank = rank
+	  	@suit = suit
+		@value = value
+	end
+
+	def rank
+		@rank
+	end
+
+	def suit
+		@suit
+	end
+
+	def value
+		@value
+	end
+end
 class Deck
 	def initialize
-		@cards = [*1..52]
+	  	@cards = 	[]
+	  	@ranks = ['A', *(2..10), 'J', 'Q', 'K']
+	  	@suits = ['♦','♣', '♥', '♠']
+	  	@ranks.each_with_index do |rank,index_1|
+		  	@suits.each_with_index do |suit, index_2|
+			  	@cards.push(Card.new(rank,suit,(index_1*4)+index_2))
+			end
+		end
 	end
 
 	def get_deck_count
@@ -12,7 +38,6 @@ class Deck
 		@cards.pop
 	end
 end
-
 class Game
   	# Initialize game
 	def initialize(name)
@@ -21,6 +46,7 @@ class Game
 		@deck = Deck.new
 	  	@playing = true
 	  	@wager = 0
+		@game_summary = [];
 	end
 
 	# Get overall score
@@ -32,34 +58,39 @@ class Game
 	def play_turn
 		player_card = @deck.get_card
 		computer_card = @deck.get_card
-		p @player_name+ " drew card "+player_card.to_s
-		p "Computer drew card "+computer_card.to_s
-
-		if player_card < computer_card
-			p "Your card is lower!"
-			if @wager == 0
-			  @score-=1
-			else
-			  @score-=@wager
-			end
-		else
-			p "Your card is higher!"
-			if @wager == 0
-				@score+=1
-			else
-			  	@score+=@wager
-			end
-		end
+		compare(player_card,computer_card)
 		p "Hey #{@player_name}, you have #{@score} points."
 	end
 
+	# Compare cards
+	def compare(player,computer)
+		p "You drew #{player.rank} #{player.suit}. Computer drew #{computer.rank} #{computer.suit}"
+		if player.value < computer.value
+		  	p "Your card is lower!"
+			result = 'loss'
+		  	if @wager == 0
+				@score-=1
+		 	else
+				@score-=@wager
+		  	end
+		else
+		  	p "Your card is higher!"
+			result = 'win'
+		  	if @wager == 0
+				@score+=1
+		  	else
+				@score+=@wager
+		  	end
+		end
+		@game_summary.push([player,computer,result])
+
+	end
 	# Set wager
 	def set_wager(wager)
+		@wager = wager.to_i
 	  	if @wager > @score and @wager > 1
-		  p "You do not have enough points. Please enter another amount."
-		  set_wager(gets.chomp)
-		else
-			@wager = wager.to_i
+		  	p "You do not have enough points. Please enter another amount."
+		  	set_wager(gets.chomp)
 		end
 	end
 
@@ -70,8 +101,10 @@ class Game
 
 	# End game message
   	def end_game
-	  p "Gamer ended!~~~~~~~~~~~"
-	  p "Your final score is #{@score.to_s} points"
+	  	p "Gamer ended!~~~~~~~~~~~"
+	  	p "Your final score is #{@score.to_s} points"
+		p "Do you want to see the summary of the game? (y/n)"
+		show_summary(gets.chomp)
 	end
 
 	# Check if continue
@@ -85,6 +118,27 @@ class Game
 			p "Continue? (y/n)"
 		  	continue_game(gets.chomp)
 	  	end
+	end
+
+	def show_summary(response)
+		if (response == "y")
+			total_wins = 0;
+			p "-".ljust(36,"–")
+			p "| Round | You vs Computer | Result |"
+			@game_summary.each.each_with_index do |record,index|
+				if (record[2] == "win")
+					total_wins+=1
+				end
+				p "| #{index+1}".ljust(6)+"|  #{record[0].rank} #{record[0].suit} vs #{record[1].rank} #{record[1].suit}".center(19)+" | #{record[2]}".ljust(9)+" |"
+			end
+			p "-".ljust(36,"–")
+			p "Total wins: #{total_wins}/#{@game_summary.length}"
+		elsif (response == "n")
+			p "Hope you had fun! Goodbye!"
+		else
+			p "Please enter a valid response"
+			show_summary(gets.chomp)
+		end
 	end
 end
 
