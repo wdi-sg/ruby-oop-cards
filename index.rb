@@ -23,10 +23,13 @@ class Game
     @pickhistory = []
     @discard = nil
     @discardhistory = []
+    @points = 0
   end
 
   def draw
     @draws = @deck.sample(2)
+    @deck -= @draws
+    @draws
   end
 
   def pick (cardNumber)
@@ -37,27 +40,71 @@ class Game
     @pick
   end
 
-  def score (points)
-    if @pick > @discard
-      points += 1
-    else
-      points -= 1
-    end
+  def discarded
+    @discard
   end
+
+  # def score
+  #   if @pick > @discard
+  #     @points += 1
+  #   else
+  #     @points -= 1
+  #   end
+  #   @points
+  # end
+
+  def score
+    @points
+  end
+
+  def wagerScore (wager)
+    @wager = wager
+    if @pick > @discard
+      @points += wager
+    else
+      @points -= wager
+    end
+    @points
+  end
+
 
 end
 
+
+
+
 Cards.new(deck)
 game = Game.new(deck)
-points = 0
 
-p 'draw:'
-p draw = game.draw
-p 'pick:'
-p pick = game.pick(1)
-p 'score:'
-p score = game.score(points)
+p "Starting a new game. Tell us who you are!"
+name = gets.chomp.capitalize
+p "Welcome #{name}!"
 
+turnCounter = 0
+restart = false
+while restart == false
+  turnCounter += 1
+  if turnCounter > 1 && game.score > 0
+    p 'How many points would you like to wager?'
+    wager = gets.chomp.to_i
+  else
+    p 'Disabling wager option because because player is broke'
+    wager = 1
+  end
+  draws = game.draw
+  p 'type 1 or 2 to pick a card'
+  pick = game.pick(gets.chomp.to_i)
+  p 'you picked '+ pick.to_s
+  p "other card was: #{game.discarded}"
+  p "score: #{score = game.wagerScore(wager)}"
+
+  p "You have #{game.score} points. Type quit to stop playing, and any other key to continue!"
+  if gets.chomp.to_s == 'quit'
+    p "Final score: #{game.score}. Play again sometime!"
+    restart = true
+  end
+
+end
 
 
 # if the player has the highest card, give them a point.
