@@ -24,6 +24,8 @@ class Card_game
       @draw = []
       @point1 = []
       @point2 = []
+      @point_1 = 0
+      @point_2 = 0
     end
 
     def draw_card(card)
@@ -34,13 +36,19 @@ class Card_game
         end
     end
 
-    def check_for_win
+    def check_for_win(points)
         if @draw[0]>@draw[1]
           puts "You win this round"
           @point1.push(@draw[0])
+          @point_1 += 1
+          @point_1 += points.to_i
+          @point_2 -= points.to_i
         else
           puts "You lose this round"
           @point2.push(@draw[1])
+          @point_2 += 1
+          @point_1 -= points.to_i
+          @point_2 += points.to_i
         end
         @draw = []
     end
@@ -50,13 +58,17 @@ class Card_game
     end
 
     def show_points
-      return @point1.length
+      return @point_1
+    end
+
+    def show_points2
+      return @point_2
     end
 
 end
 
 
-puts "Hello there. What is your name?"
+puts "Hello stranger. What is your name?"
 player_name = gets.chomp
 puts " "
 puts " "
@@ -74,21 +86,32 @@ all_cards = card_deck.see_cards
 all_cards = all_cards.shuffle
 # puts "this is the sshuffled card #{all_cards}"
 puts 'The deck is being shuffled'
+puts " "
+puts " "
+puts " "
+puts "#{player_name}, lets bet on your score"
 i = all_cards.length/2
 until i == 0 || answer == 'no' do
     if answer == 'yes'
+        puts "How much points do you want to bet?"
+        answer3 = gets.chomp
+        puts " "
+        puts " "
+        puts " "
         first_two_card = all_cards.slice!(0,2)
         puts "Your card is : #{first_two_card[0]}"
         puts "Your opponent card is: #{first_two_card[1]}"
         new_game.draw_card(first_two_card)
-        new_game.check_for_win
+        new_game.check_for_win(answer3)
         i -= 1
     end
     puts " "
     puts " "
     puts " "
     score = new_game.show_points
+    score_oppo = new_game.show_points2
     puts "this is your current score #{score}"
+    puts "this is your opponent score #{score_oppo}"
     puts "You have #{i} rounds left. Do you still want to continue?"
     answer = gets.chomp
     puts " "
@@ -96,7 +119,7 @@ until i == 0 || answer == 'no' do
     puts " "
 end
 score = new_game.show_points
-puts "Number of wins: #{score}"
+puts "Your points: #{score}"
 
 
 
