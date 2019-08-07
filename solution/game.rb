@@ -1,4 +1,5 @@
 class Game
+
   def initialize
     @deck = Cards.new
     @score = 0
@@ -16,6 +17,7 @@ class Game
     else
       @score -= 1
     end
+
   end
 
   def check_game

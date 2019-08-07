@@ -14,23 +14,34 @@ class Game
 
   def initialize
     @deck = Card.new
-    score = 0
-    cardsPlayed = []
+    @score = 0
+    @cardsPlayed = []
   end
 
-  def playGame
+  def play
+    @deck
     user_hand = @deck.getOneCard
     house_hand = @deck.getOneCard
-    puts user_hand
-    puts house_hand
+
+    @cardsPlayed << [user_hand, house_hand]
+
+    puts "You drew a: #{user_hand}"
+    puts "The house drew a: #{house_hand}"
+
+    if user_hand > house_hand
+      puts "Your card is higher. You win a point!"
+      @score += 1
+
+    else
+      puts "Your card is lower. You lose a point!"
+      @score -= 1
+
+    end
+
+  end
+
+  def check_game
+    @score
   end
 
 end
-
-newGame = Game.new()
-
-newGame.playGame()
-# newGame.pickTwoCards()
-# There are 52 cards in a standard deck.
-# Each card belongs to one of four suits: Spades, Hearts, Diamonds, and Clubs.
-# Each card is one of 13 ranks: Ace, 2, 3, 4, 5, 6, 7, 8, 9, 10, Jack, Queen, and King.
