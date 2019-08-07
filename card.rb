@@ -31,20 +31,10 @@ class Game
 	end
 
 	def playerTurn
-		puts "Choose a card from the Deck:"
-		chosenNumber = gets.chomp
-
-		if @deck[0].include?(chosenNumber)
-			index = @deck[0].find_index(chosenNumber)
-			@chosenByPlayer[0].push(@deck[0].delete(chosenNumber))
-			@chosenByPlayer[1].push(@deck[1].delete_at(index))
-			return true
-		else 
-			puts
-			puts "Either wrong input or card has been chosen!"
-			puts
-			self.playerTurn
-		end
+		card = @deck[0][rand(deck[0].length)]
+		index = @deck[0].find_index(card)
+		@chosenByPlayer[0].push(@deck[0].delete(card))
+		@chosenByPlayer[1].push(@deck[1].delete_at(index))
 	end 
 
 	def computerTurn
@@ -75,21 +65,6 @@ class Game
 		end
 	end
 
-	def displayRules
-		puts
-		puts "************************************* \n* Welcome to the Ruby OOP Card Game * \n*************************************"
-		puts
-
-
-		puts "Rules of the game:"
-		puts "1. Choose a card from the deck."
-		puts "2, The computer will then choose a card."
-		puts "3. If your card is higher than the card the computer choose, you win a point!"
-		puts "4. If your card is lower, you lose a point!"
-		puts "5. If your score is lower than -2, you lose the game!"
-		puts 
-	end
-
 	def continue
 		puts "Continue with Game? (Y/N)"
 		choice = gets.chomp
@@ -112,7 +87,14 @@ class Game
 
 		check = points.to_i
 		if check.to_s == points
-			@bet = check
+			if (check <= @player[:score]+2 && check >0)
+				@bet = check
+			else
+				puts
+				puts "Invalid Bet"
+				puts
+				self.getBet
+			end
 		else
 			puts
 			puts "Invalid Bet"
@@ -141,7 +123,7 @@ puts "First, what is your name?"
 playerName = gets.chomp
 
 cardDeck = Cards.new
-newGame = Game.new(cardDeck.deck, {:name =>playerName, :score=>0})
+newGame = Game.new(cardDeck.deck, {:name =>playerName, :score=>10})
 
 while (newGame.deck[0].length>0 && newGame.player[:score]>=-2)
 
