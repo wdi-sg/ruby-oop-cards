@@ -6,7 +6,6 @@ class Game
   end
 
   def play
-    
     user_hand = @deck.show_card
     house_hand = @deck.show_card
 
