@@ -1,13 +1,15 @@
 class Game
   def initialize
     @deck = Cards.new
-    @score = 0
+    @score = 100
     @hands = []
   end
 
   def play
     user_hand = @deck.show_card
+    puts "Your hand is #{user_hand}"
     house_hand = @deck.show_card
+    puts "The house hand is #{house_hand}"
 
     @hands << [user_hand, house_hand]
 
