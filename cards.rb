@@ -125,13 +125,3 @@ end
 #   puts "              You lost              "
 #   puts " @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ "
 # end
-
-
-
-
-# card.each do |email|
-#   puts "Date:    #{email.date}"
-#   puts "From:    #{email.from}"
-#   puts "Subject: #{email.subject}"
-#   puts
-# end
