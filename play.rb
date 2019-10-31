@@ -29,8 +29,7 @@ while playing
         next 
     elsif user_answer == 'yes'
         playing = false
-        puts "#{user_name} folds and game ends"
-        
+        puts "#{user_name} folds and ends game with #{game.game_results.to_s} points"
     end
 
     # losing condition
