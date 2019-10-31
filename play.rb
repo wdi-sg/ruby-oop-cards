@@ -3,12 +3,16 @@ require './cards'
 
 playing = true
 
-game = Game.new
+puts "Enter name"
+
+name = gets.chomp
+
+game = Game.new(name)
 
 while playing
 
   game.play
-  puts "current score is: #{game.check_game.to_s}"
+  puts "#{game.name}, Your current score is: #{game.check_game.to_s}"
 
   puts "do you want to play this hand?"
 
@@ -17,8 +21,10 @@ while playing
     puts "folding"
     next
   elsif answer == "yes"
-    puts "playing"
+    puts "playing hand"
     next
+  else
+    puts "input invalid"
   end
 
   if game.check_game < -2

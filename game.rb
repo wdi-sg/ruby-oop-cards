@@ -1,5 +1,8 @@
 class Game
-  def initialize
+  attr_accessor :name
+
+  def initialize(name)
+    @name = name
     @deck = Cards.new
     @score = 0
     @hands = []
