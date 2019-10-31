@@ -17,6 +17,7 @@ class Game
 def initialize
     @deck = Cards.new
     @score = 0
+    @computerScore = 0
     @turn = []
 end
 
@@ -32,8 +33,10 @@ puts "Computer is: #{computer}"
 
     if player > computer
       @score += 1
+      @computerScore -= 1
     else
       @score -= 1
+      @computerScore += 1
     end
 end
 
@@ -47,6 +50,7 @@ end
 
 def check_game
     @score
+    @computerScore
 end
 
 end
@@ -60,8 +64,12 @@ while playing
 
   game.play
 
-puts "current score is: #{game.check_game.to_s}"
-puts "do you want to play this turn?"
+puts "Your current score is: #{game.check_game.to_s}"
+# puts "The computer's score is: #{game.check_game.to_s}"
+
+# if game.check_game.to_s > 
+
+puts "Do you want to play this round?"
 
   answer = gets.chomp
 #   add a way to exit the game....
