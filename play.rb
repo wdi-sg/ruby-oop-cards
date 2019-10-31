@@ -16,6 +16,9 @@ while playing
   if answer == "no"
     puts "folding"
     next
+  elsif answer == "yes"
+    puts "playing"
+    next
   end
 
   if game.check_game < -2

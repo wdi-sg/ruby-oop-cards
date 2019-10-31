@@ -8,6 +8,8 @@ class Game
   def play
     user_hand = @deck.show_card
     house_hand = @deck.show_card
+    puts "your hand value: #{user_hand}"
+    puts "house hand value: #{house_hand}"
 
     @hands << [user_hand, house_hand]
 
