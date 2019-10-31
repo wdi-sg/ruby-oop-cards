@@ -25,6 +25,9 @@ class Cards
     def play
       user_hand = @deck.show_card
       house_hand = @deck.show_card
+
+      puts "Player Card is: #{user_hand}"
+      puts "Computer Card is: #{house_hand}"     
   
       @hands << [user_hand, house_hand]
   
