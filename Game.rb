@@ -1,5 +1,6 @@
 class Game
-  def initialize()
+  def initialize(name)
+    @name = name
     @deck = Cards.new
     @score = 0
     @hands = []
@@ -10,10 +11,10 @@ class Game
     house_hand = @deck.show_card
     @hands << [player_hand, house_hand]
     if player_hand > house_hand
-      p "Player hand: #{player_hand}, House hand: #{house_hand}"
+      p "#{@name} hand: #{player_hand}, House hand: #{house_hand}"
       @score += 1
     else
-      p "Player hand: #{player_hand}, House hand: #{house_hand}"
+      p "#{@name} hand: #{player_hand}, House hand: #{house_hand}"
       @score -= 1
     end
   end
