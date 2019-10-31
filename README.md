@@ -22,7 +22,7 @@ Create a game of cards using ruby objects.
 - Look in the solution class files if you forget the syntax of ruby classes
 
 # further
-Ask the player for their name at the beggining of the game, and print it out at each turn.
+Ask the player for their name at the beginning of the game, and print it out at each turn.
 Example: "hello Ray, you have 10 points."
 
 # further
