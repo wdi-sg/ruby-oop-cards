@@ -1,5 +1,7 @@
 class Cards
     # initialize
+    #welcome message
+
     def initialize
         # create empty array
         @cards = []
@@ -11,6 +13,7 @@ class Cards
         }
     end
 
+
     # for house to show hand
     def show_card
         @cards.shuffle.first
@@ -21,6 +24,7 @@ class Cards
     def get_card
         @cards.shuffle.pop
     end
+
 
 end
 
