@@ -5,6 +5,8 @@ class Cards
         @cards = []
         # loop ...something 52 times
         52.times { |number|
+            # '<<' means add to the end of this array
+            #in this case, a new number is added to the end of @cards
             @cards << number
         }
     end
@@ -14,7 +16,7 @@ class Cards
         @cards.shuffle.first
     end
 
-    # for player to draw card from bottom?
+    # drawing of card?
 
     def get_card
         @cards.shuffle.pop

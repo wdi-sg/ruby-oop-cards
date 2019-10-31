@@ -23,6 +23,7 @@ class Game
         else 
             #user's score decreased by 1
             @score -= 1
+        end
     end
 
     def game_results
