@@ -27,9 +27,15 @@ class Cards
       house_hand = @deck.show_card
 
       puts "Player Card is: #{user_hand}"
-      puts "Computer Card is: #{house_hand}"     
-  
-      @hands << [user_hand, house_hand]
+      puts "Computer Card is: #{house_hand}"    
+      
+      if house_hand > user_hand
+        puts "Sorry bra, you lost..."    
+      else
+        puts "Noice."
+      end   
+
+     @hands << [user_hand, house_hand]
   
       if user_hand > house_hand
         @score += 1
@@ -58,6 +64,12 @@ class Cards
     puts "do you want to play this hand?"
   
     answer = gets.chomp
+    if answer == "q"
+        playing = false  
+    end
+        
+
+
     if answer == "no"
       puts "folding"
       next
